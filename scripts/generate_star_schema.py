@@ -67,8 +67,10 @@ def main():
     fact_events["person_key"] = fact_events["person_id"].map(person_map)
     fact_events["date_id"] = fact_events["event_date"].map(date_map)
     fact_events.insert(0, "event_id", range(1, len(fact_events) + 1))
-    fact_events = fact_events[
-        ["event_id", "person_key", "event_type_id", "date_id", "location_id"]
+    ffoact_events = fact_events[
+    fact_events["confidence_score"] = ""
+
+        ["event_id", "person_key", "event_type_id", "date_id", "location_i, "confidence_score"d"]
     ]
 
     # --- Save outputs ---
