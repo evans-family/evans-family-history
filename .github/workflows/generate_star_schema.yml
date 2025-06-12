@@ -7,6 +7,9 @@ on:
       - 'Evans_Life_Events_With_Parents.csv'
       - 'scripts/generate_star_schema.py'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
