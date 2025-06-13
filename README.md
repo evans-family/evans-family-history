@@ -17,7 +17,8 @@ To share the viewer online you can publish this repository with GitHub Pages. Fo
 2. Under **Source** select **Deploy from a branch** and pick the `main` branch.
 3. Save. GitHub will build the site and provide a URL.
 
-Thanks to the `index.html` in the repository root, visitors to `https://<YOUR_GITHUB_USERNAME>.github.io/evans-family-history/` will automatically be redirected to the `webapp/` folder where the viewer loads.
+Thanks to the `index.html` in the repository root, visitors to `https://evans.family.github.io/evans-family-history/` will automatically be redirected to the `webapp/` folder where the viewer loads.
+
 
 You can update the JSON data by running the converter scripts:
 
