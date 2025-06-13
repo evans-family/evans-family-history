@@ -30,6 +30,6 @@ python3 scripts/gedcom_to_balkan.py data/EvansFamilyTree.json data/balkan_family
 ```
 
 Once published, share the GitHub Pages URL with relatives so they can explore the tree interactively.
-[FamilyTreeJS]()
+[Demo Tree](https://evans.family.github.io/evans-family-history/)
 
 
