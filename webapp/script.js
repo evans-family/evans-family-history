@@ -1,5 +1,5 @@
 async function loadData() {
-  const response = await fetch('../data/balkan_familytree.json');
+  const response = await fetch('balkan_familytree.json');
   return await response.json();
 }
 
@@ -14,7 +14,11 @@ function renderTree(nodes, rootId) {
     template: 'john',
     nodeBinding: { field_0: 'name' },
     nodes,
-    roots: [rootId]
+    roots: [rootId],
+    scaleInitial: 1,
+    scaleMin: 0.02,
+    enablePan: true,
+    mouseScrool: FamilyTree.action.zoom
   });
 }
 
