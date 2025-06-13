@@ -2,50 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Evans Family - People</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-    th { background: #f2f2f2; }
-  </style>
+  <meta http-equiv="refresh" content="0; url=webapp/" />
+  <title>Evans Family Tree</title>
 </head>
 <body>
-  <h1>Evans Family - People</h1>
-  <p>This page lists all individuals from our family STAR schema.</p>
-  <table id="people">
-    <thead></thead>
-    <tbody></tbody>
-  </table>
-  <script>
-    fetch('https://raw.githubusercontent.com/evans-family/evans-family-history/main/star_schema/dim_persons.csv')
-      .then(response => response.text())
-      .then(text => {
-        const rows = text.trim().split('\n').map(r => r.split(','));
-        const thead = document.querySelector('#people thead');
-        const tbody = document.querySelector('#people tbody');
-        // Header row
-        const headerRow = document.createElement('tr');
-        rows[0].forEach(h => {
-          const th = document.createElement('th');
-          th.textContent = h;
-          headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
-        // Data rows
-        rows.slice(1).forEach(r => {
-          const tr = document.createElement('tr');
-          r.forEach(c => {
-            const td = document.createElement('td');
-            td.textContent = c;
-            tr.appendChild(td);
-          });
-          tbody.appendChild(tr);
-        });
-      })
-      .catch(err => {
-        document.body.insertAdjacentHTML('beforeend', `<p style="color:red;">Failed to load data: ${err}</p>`);
-      });
-  </script>
+  <p>Redirecting to <a href="webapp/">Evans Family Tree Viewer</a>...</p>
 </body>
 </html>
