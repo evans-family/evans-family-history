@@ -14,9 +14,12 @@
 </head>
 <body>
 <h1>Evans Family Tree</h1>
-<input id="search" type="text" placeholder="Search for a family member" />
-<button id="searchBtn">Search</button>
+  <input id="search" type="text" placeholder="Search for a family member" />
+  <button id="searchBtn">Search</button>
   <div id="results"></div>
+  <label id="spouseLabel" style="display:none">Spouse:
+    <select id="spouseSelect"></select>
+  </label>
   <div id="tree"></div>
   <p>By default the first person in the data is displayed. Use the search above to jump to a relative.</p>
   <script src="script.js"></script>
