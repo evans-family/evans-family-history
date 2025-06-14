@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Evans Family Tree Viewer</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h2>Evans Family Tree</h2>
+  <div id="table-container">Loading...</div>
+
+  <script>
+    // Function to flatten the tree structure into table rows
+    function flattenTree(root) {
+      const flat = [];
+
+      function recurse(node, parentName = "", generation = 0) {
+        const { name, birth, death } = node;
+        flat.push({ name, birth, death, parent: parentName || "", generation });
+
+        if (node.children && Array.isArray(node.children)) {
+          node.children.forEach(child => recurse(child, name, generation + 1));
+        }
+      }
+
+      recurse(root);
+      return flat;
+    }
+
+    // Load and render the data
+    d3.json("../../data/Evans.family.tree.json").then(data => {
+      const flatData = flattenTree(data);
+      const keys = ["name", "birth", "death", "parent", "generation"];
+
+      const table = d3.select("#table-container").html("").append("table");
+      const thead = table.append("thead");
+      const tbody = table.append("tbody");
+
+      thead.append("tr")
+        .selectAll("th")
+        .data(keys)
+        .enter()
+        .append("th")
+        .text(d => d.charAt(0).toUpperCase() + d.slice(1));
+
+      const rows = tbody.selectAll("tr")
+        .data(flatData)
+        .enter()
+        .append("tr");
+
+      rows.selectAll("td")
+        .data(d => keys.map(k => d[k]))
+        .enter()
+        .append("td")
+        .text(d => d ?? "");
+    }).catch(error => {
+      d3.select("#table-container").text("Failed to load data: " + error);
+    });
+  </script>
+</body>
+</html>
