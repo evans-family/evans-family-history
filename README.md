@@ -1,5 +1,7 @@
 # Evans Family History
 
+[Demo Tree](https://evans.family.github.io/evans-family-history/)
+
 This repository stores genealogical data and supporting tools for the Evans family tree. The GEDCOM file has been converted to JSON and a simple JavaScript viewer is provided.
 
 You can explore the information online through the [family history dashboard](https://evans-family.github.io/evans-family-history/).
@@ -33,6 +35,6 @@ python3 scripts/gedcom_to_balkan.py data/EvansFamilyTree.json data/balkan_family
 ```
 
 Once published, share the GitHub Pages URL with relatives so they can explore the tree interactively.
-[Demo Tree](https://evans.family.github.io/evans-family-history/)
+
 
 
