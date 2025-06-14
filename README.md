@@ -2,7 +2,7 @@
 
 [Demo Tree](https://evans.family.github.io/evans-family-history/)
 
-This repository stores genealogical data and supporting tools for the Evans family tree. The GEDCOM file has been converted to JSON and a simple JavaScript viewer is provided.
+This repository stores genealogical data and supporting tools for the Evans family tree. The GEDCOM file has been converted to JSON and a small web viewer powered by [FamilyTreeJS](https://balkan.app/FamilyTreeJS) is provided.
 
 You can explore the information online through the [family history dashboard](https://evans-family.github.io/evans-family-history/).
 
@@ -10,7 +10,7 @@ You can explore the information online through the [family history dashboard](ht
 
 - **data/** – contains the family tree JSON files
 - **scripts/** – utilities such as the GEDCOM to JSON converter
-- **viewer/** – JavaScript application for exploring the tree 
+- **viewer/** – JavaScript application for exploring the tree using FamilyTreeJS
 - **data_science/** – placeholder for Python analysis workflows
 
 While the converter script remains for reference, the focus of the repository is the interactive family tree viewer that you can share with relatives. The project may later integrate with AWS for hosting and data processing.
@@ -21,7 +21,7 @@ To share the viewer online you can publish this repository with GitHub Pages. Fo
 2. Under **Source** select **Deploy from a branch** and pick the `main` branch.
 3. Save. GitHub will build the site and provide a URL.
 
-Thanks to the `index.html` in the repository root, visitors to `https://evans.family.github.io/evans-family-history/` will automatically be redirected to the `viewer/` folder where the viewer loads. The viewer fetches `data/balkan_familytree.json` directly.
+Thanks to the `index.html` in the repository root, visitors to `https://evans.family.github.io/evans-family-history/` will automatically be redirected to the `viewer/` folder where the FamilyTreeJS viewer loads. It fetches `data/balkan_familytree.json` directly.
 
 
 If you encounter a **404 File not found** error when visiting the site, ensure that GitHub Pages is enabled from the repository **Settings** and the `main` branch is selected as the source. The included `404.html` page will redirect broken links back to the viewer.

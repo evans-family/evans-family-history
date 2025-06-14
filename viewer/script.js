@@ -1,62 +1,50 @@
-let nodes = [];
-
 async function loadData() {
-  const res = await fetch('../data/balkan_familytree.json');
-  nodes = await res.json();
+  const response = await fetch('../data/balkan_familytree.json');
+  return await response.json();
 }
 
-function findMatches(query) {
+function searchNodes(nodes, query) {
   const q = query.toLowerCase();
   return nodes.filter(n => n.name && n.name.toLowerCase().includes(q));
 }
 
-function getById(id) {
-  return nodes.find(n => n.id === id);
+function renderTree(nodes, rootId) {
+  document.getElementById('tree').innerHTML = '';
+  new FamilyTree(document.getElementById('tree'), {
+    template: 'john',
+    nodeBinding: { field_0: 'name' },
+    nodes,
+    roots: [rootId],
+    scaleInitial: 1,
+    scaleMin: 0.02,
+    enablePan: true,
+    mouseScrool: FamilyTree.action.zoom
+  });
 }
 
-function getChildren(id) {
-  return nodes.filter(n => n.fid === id || n.mid === id);
-}
-
-function showDetails(person) {
-  const container = document.getElementById('details');
-  container.innerHTML = '';
-  if (!person) {
-    container.textContent = 'No person selected.';
-    return;
-  }
-  const father = getById(person.fid);
-  const mother = getById(person.mid);
-  const spouses = (person.pids || []).map(getById);
-  const children = getChildren(person.id);
-  container.innerHTML = `
-    <h2>${person.name}</h2>
-    <p><strong>Father:</strong> ${father ? father.name : 'Unknown'}</p>
-    <p><strong>Mother:</strong> ${mother ? mother.name : 'Unknown'}</p>
-    <p><strong>Spouse(s):</strong> ${spouses.map(s => s.name).join(', ') || 'None'}</p>
-    <p><strong>Children:</strong> ${children.map(c => c.name).join(', ') || 'None'}</p>
-  `;
-}
-
-function setup() {
+async function main() {
+  const nodes = await loadData();
   const searchBtn = document.getElementById('searchBtn');
   const searchInput = document.getElementById('search');
   const resultsDiv = document.getElementById('results');
 
+  const defaultId = nodes[0].id;
+  renderTree(nodes, defaultId);
+
   searchBtn.onclick = () => {
+    const results = searchNodes(nodes, searchInput.value);
     resultsDiv.innerHTML = '';
-    const matches = findMatches(searchInput.value);
-    if (matches.length === 0) {
+    if (results.length === 0) {
       resultsDiv.textContent = 'No matches found.';
       return;
     }
-    matches.forEach(p => {
+    results.forEach(r => {
       const btn = document.createElement('button');
-      btn.textContent = p.name;
-      btn.onclick = () => showDetails(p);
+      btn.textContent = r.name;
+      btn.onclick = () => renderTree(nodes, r.id);
       resultsDiv.appendChild(btn);
     });
   };
 }
 
-loadData().then(setup);
+main();
